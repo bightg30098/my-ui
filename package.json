@@ -14,8 +14,13 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.23.1",
+    "@headlessui/react": "^1.7.14",
+    "@heroicons/react": "^2.0.17",
+    "nanoid": "^4.0.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tailwind-merge": "^1.12.0"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.0.7",
