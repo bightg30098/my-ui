@@ -1,18 +1,13 @@
 import { twMerge } from 'tailwind-merge'
 import { useControlled } from '../../hooks/useControlled'
 
+import type { BaseOption } from '../types'
+
 export type ButtonGroupProps = {
   className?: string
-  options?: ButtonGroupOption[]
-  selected?: ButtonGroupOption
-  onChange?: (option: ButtonGroupOption) => void
-}
-
-export type ButtonGroupOption = {
-  key: string
-  value: string
-  alias?: string
-  disabled?: boolean
+  options?: BaseOption[]
+  selected?: BaseOption
+  onChange?: (option: BaseOption) => void
 }
 
 export default function ButtonGroup(props: ButtonGroupProps) {
@@ -23,7 +18,7 @@ export default function ButtonGroup(props: ButtonGroupProps) {
     controlledProp: 'selected',
   })
 
-  const handleOnChange = (option: ButtonGroupOption) => {
+  const handleOnChange = (option: BaseOption) => {
     if (!isControlled) setUncontrolledValue(option)
     onChange(option)
   }
