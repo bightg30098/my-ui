@@ -9,17 +9,27 @@
     "preview": "vite preview",
     "lint": "rome check src",
     "lint:fix": "rome check src --apply-unsafe",
-    "format": "rome format src --write"
+    "format": "rome format src --write",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^7.0.7",
+    "@storybook/addon-interactions": "^7.0.7",
+    "@storybook/addon-links": "^7.0.7",
+    "@storybook/blocks": "^7.0.7",
+    "@storybook/react": "^7.0.7",
+    "@storybook/react-vite": "^7.0.7",
+    "@storybook/testing-library": "^0.1.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.1",
     "@vitejs/plugin-react-swc": "^3.3.0",
     "rome": "^12.0.0",
+    "storybook": "^7.0.7",
     "typescript": "^5.0.4",
     "vite": "^4.3.3"
   }
