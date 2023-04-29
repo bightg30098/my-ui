@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react'
-
-import ButtonGroup from './ButtonGroup'
-import { nanoid } from 'nanoid'
 import { faker } from '@faker-js/faker'
+import { nanoid } from 'nanoid'
 import { useMemo, useState } from 'react'
+import ButtonGroup from './ButtonGroup'
+
+import type { Meta, StoryObj } from '@storybook/react'
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {

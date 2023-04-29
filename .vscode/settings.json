@@ -1,0 +1,22 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "tailwindCSS.experimental.classRegex": ["twMerge\\(([^)]*)\\)"],
+  "[typescript]": {
+    "editor.defaultFormatter": "rome.rome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "rome.rome"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "rome.rome"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "rome.rome"
+  }
+}
