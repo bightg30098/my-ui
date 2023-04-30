@@ -1,3 +1,4 @@
+import { autoUpdate, flip, useFloating, type Placement, type Strategy } from '@floating-ui/react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { Fragment } from 'react'
@@ -11,16 +12,32 @@ export type SelectProps = {
   selected?: BaseOption
   onChange?: (option: BaseOption) => void
   className?: string
+  placement?: Placement
+  strategy?: Strategy
 }
 
 export default function Select(props: SelectProps) {
-  const { className, options = [], selected = options[0], onChange = () => {} } = props
+  const {
+    className,
+    options = [],
+    selected = options[0],
+    placement: _placement = 'bottom',
+    strategy: _strategy = 'absolute',
+    onChange = () => {},
+  } = props
 
   const {
     value: _selected,
     isControlled,
     setUncontrolledValue,
   } = useControlled(props, { defaultValue: selected, controlledProp: 'selected' })
+
+  const { x, y, strategy, refs } = useFloating({
+    placement: _placement,
+    strategy: _strategy,
+    middleware: [flip({ padding: 8 })],
+    whileElementsMounted: autoUpdate,
+  })
 
   const handleOnChange = (option: BaseOption) => {
     if (!isControlled) setUncontrolledValue(option)
@@ -30,14 +47,26 @@ export default function Select(props: SelectProps) {
   return (
     <div className={twMerge('relative w-fit', className)}>
       <Listbox value={_selected} onChange={handleOnChange}>
-        <Listbox.Button className='relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm'>
+        <Listbox.Button
+          className='relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm'
+          ref={refs.setReference}
+        >
           <span className='block truncate'>{_selected.value}</span>
           <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
             <ChevronUpDownIcon className='h-5 w-5 text-gray-400' aria-hidden='true' />
           </span>
         </Listbox.Button>
         <Transition as={Fragment} leave='transition ease-in duration-100' leaveFrom='opacity-100' leaveTo='opacity-0'>
-          <Listbox.Options className='absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
+          <Listbox.Options
+            className='absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'
+            ref={refs.setFloating}
+            style={{
+              position: strategy,
+              top: y ?? 0,
+              left: x ?? 0,
+              width: 'inherit',
+            }}
+          >
             {options.map((option) => (
               <Listbox.Option
                 key={option.key}

@@ -36,3 +36,12 @@ export const Controlled: Story = {
     return <Select {...args} options={options} selected={selected} onChange={setSelected} />
   },
 }
+
+export const Fixed: Story = {
+  args: {
+    options: Array.from({ length: 3 }, () => ({ key: nanoid(), value: faker.word.noun() })),
+    className: 'w-64',
+    strategy: 'fixed',
+  },
+  render: (args) => <Select {...args} />,
+}
